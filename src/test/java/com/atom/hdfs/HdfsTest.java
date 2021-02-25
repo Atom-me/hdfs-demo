@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 class HdfsTest {
     private static final String HDFS_PATH = "hdfs://datago:9000";
@@ -36,6 +37,11 @@ class HdfsTest {
         fileSystem = null;
     }
 
+    /**
+     * 创建目录，使用默认权限（）
+     *
+     * @throws IOException
+     */
     @Test
     public void testMakeDirWithDirDefaultPermission() throws IOException {
         boolean mkdirs = fileSystem.mkdirs(new Path("/atom/test001/"), FsPermission.getDirDefault());
@@ -239,6 +245,47 @@ class HdfsTest {
             System.out.println("大小:" + f.getLen());
             System.out.println("==========================");
         }
+
+    }
+
+
+    /**
+     * 判断文件是否存在
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testCheckExists() throws IOException {
+        boolean exists = fileSystem.exists(new Path("/dir2/11.png"));
+        System.err.println(exists);
+    }
+
+
+    /**
+     * 查看文件内容（查看小文本文件的内容，直接转换成字符串后输出：）
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testReadToString() throws IOException {
+        FSDataInputStream dataInputStream = fileSystem.open(new Path("/dir1/dir1-1/a.txt"));
+//        IOUtils.copyBytes(dataInputStream, System.out, 1024, true);
+        List<String> strings = org.apache.commons.io.IOUtils.readLines(dataInputStream);
+        strings.forEach(System.err::println);
+    }
+
+
+    /**
+     * 文件重命名
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testRename() throws IOException {
+        Path oldPath = new Path("/dir1/dir1-1/b.txt");
+        Path newPath = new Path("/dir1/dir1-1/c.txt");
+        boolean rename = fileSystem.rename(oldPath, newPath);
+        System.err.println(rename);
 
     }
 
