@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 class HdfsTest {
-    private static final String HDFS_PATH = "hdfs://datago:9000";
+    private static final String HDFS_PATH = "hdfs://10.16.118.247:8020";
     private static final String HDFS_USER = "root";
     private static FileSystem fileSystem;
 
@@ -91,8 +91,8 @@ class HdfsTest {
      */
     @Test
     public void testUploadFile() throws IOException {
-        Path src = new Path("/Users/atom/ubuntu-wallpapers/11.png");
-        Path dest = new Path("/dir2/11.png");
+        Path src = new Path("/Users/atom/jxplorerjxconfig.txt");
+        Path dest = new Path("/dir2/12.png");
 
         //还可以设置是否删除本地文件，以及是否覆盖hdfs中的原有同名文件
         //默认不删除本地文件，覆盖远端文件
@@ -201,7 +201,7 @@ class HdfsTest {
      */
     @Test
     public void testListFileMetaData() throws IOException {
-        RemoteIterator<LocatedFileStatus> pathList = fileSystem.listFiles(new Path("/dir2"), false);
+        RemoteIterator<LocatedFileStatus> pathList = fileSystem.listFiles(new Path("/"), false);
         while (pathList.hasNext()) {
             LocatedFileStatus fileStatus = pathList.next();
             System.out.println("文件名：" + fileStatus.getPath().getName());
