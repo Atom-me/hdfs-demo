@@ -39,6 +39,7 @@ public class HadoopS3Demo {
 
     public static void main(String[] args) throws IOException {
         Configuration configuration = new Configuration();
+        //Status Code: 400, AWS Service: Amazon S3,
         System.setProperty(AWS_S3_V4, "true");
         configuration.set(FS_DEFAULTFS, "s3a://liuyaming-hdfs-test");
         configuration.set(FS_S3A_ENDPOINT, "https://s3.cn-northwest-1.amazonaws.com.cn");
