@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
  */
 public class HadoopHDFSDemo {
     private static final String HDFS_PATH = "hdfs://10.16.118.247:8020";
+    //设置客户端身份，以具备权限在HDFS上进行操作
     private static final String HDFS_USER = "root";
     private static FileSystem fileSystem;
 
@@ -29,6 +30,8 @@ public class HadoopHDFSDemo {
         // 这里我启动的是单节点的 Hadoop,所以副本系数设置为 1,默认值为 3
         configuration.set("dfs.replication", "1");
         configuration.set("dfs.client.use.datanode.hostname", "true");
+// 设置客户端身份为管理员 root ,(root也可能不是管理员，这时就需要设置具体的管理员用户)
+//        System.setProperty("HADOOP__USER_NAME", "root");
         fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration, HDFS_USER);
 
         if (createDirectory()) {
