@@ -15,6 +15,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
+ *
+ * 使用HDFS客户端上传文件至HDFS
  * @author Atom
  */
 public class HadoopHDFSDemo {

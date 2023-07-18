@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
+ * 使用HDFS 客户端上传文件至 AWS S3
+ *
  * @author Atom
  */
 public class HadoopS3Demo {
